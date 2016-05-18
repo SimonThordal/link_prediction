@@ -1,0 +1,66 @@
+TF-IDF
+
+* Introduction
+* Parameter evaluation
+* Weighted by common neighbors
+
+To evaluate the text content of two verdicts they are represented as word vectors, weighted by their term frequency inverse document frequency (TF-IDF) and their similarity is found as the cosine difference of the vectors. Different *tf-idf* parameters are evaluated using a cross-validated grid search. Both the raw similarity score and weighted versions were evaluated using a logistic regression model.
+
+#### TF-IDF based similarity
+Behind *tf-idf* lies the idea that rarer words give more information about a verdict than common words. This can be formalized as
+
+$$
+\text[idf] &= \log \frac{N}{|d \ \in \ D : t \ \in \ d|}
+\text[tf] &= | t \ \in \ d |
+\text[tf-idf] &= tf \dot idf
+$$
+
+where $N$ is the size of the collection of verdicts, $d \ \in \ D$ is a single verdict in the collection and $t \ \in \ d$ is a single term in a verdict [](#cite-Salton88term). This approach penalizes terms that appear in many different verdicts in the collection and the smaller the angle between two *tf-idf* vectors the more similar are the verdicts. The angle is similar to the cosine difference which leads to the following similarity measure
+$$
+\text[score](x,y) &= 1-\text[cosine difference](X, Y)
+$$
+where $x$ and $y$ are nodes in the network and $X$ and $Y$ are the tf-idf weighted word vectors of the content of $x$ and $y$. Different versions of TF-IDF exist and this particular version as it is descriptive and has been shown to have good performance [](#cite-Salton88term).
+
+#### Pre-processing and parameter evaluation
+
+To improve the performance of the tf-idf feature it is possible to adjust parameters that remove highly frequent terms from the corpus, remove rare terms and performing dimensionality reduction using methods such as principal components analysis (PCA).
+
+[(1, 0.3, 2013, 0.030220328552376934, 0.79604390838952521),
+ (1, 0.3, 2012, 0.076931109883416365, 0.82502234635188032),
+ (1, 0.3, 2011, 0.072307280934456319, 0.81131075412339126),
+ (1, 0.6, 2013, 0.031740085901128076, 0.80122783933216724),
+ (1, 0.6, 2012, 0.08136337770460772, 0.82205970434776032),
+ (1, 0.6, 2011, 0.07397257568423371, 0.81704031212794237),
+ (1, 0.7, 2013, 0.032148791401581417, 0.8002872764340252),
+ (1, 0.7, 2012, 0.082303344059111813, 0.8285018881834999),
+ (1, 0.7, 2011, 0.074370306966269339, 0.81336836982381233),
+ (1, 0.8, 2013, 0.033241297213946489, 0.80688070419544933),
+ (1, 0.8, 2012, 0.084533586263725369, 0.83292892300729682),
+ (1, 0.8, 2011, 0.076597003793682852, 0.8187057259313042),
+ (1, 1.0, 2013, 0.024381769734126025, 0.63487176758582586),
+ (1, 1.0, 2012, 0.040822223468331739, 0.70699331615435268),
+ (1, 1.0, 2011, 0.020782694265584045, 0.67699343210048912),
+ (0.01, 0.3, 2013, 0.029614244067873739, 0.80104424411418129),
+ (0.01, 0.3, 2012, 0.071206852655774228, 0.82947881275955349),
+ (0.01, 0.3, 2011, 0.071158876027777263, 0.81667363277459681),
+ (0.01, 0.6, 2013, 0.033493772784504418, 0.80932992450148278),
+ (0.01, 0.6, 2012, 0.078775637544841362, 0.83747720255315961),
+ (0.01, 0.6, 2011, 0.078248080713305565, 0.82399563600319936),
+ (0.01, 0.7, 2013, 0.03404455617518614, 0.81401249549238119),
+ (0.01, 0.7, 2012, 0.079758724608450349, 0.83658071917541432),
+ (0.01, 0.7, 2011, 0.079078435993561819, 0.82955838588726039),
+ (0.01, 0.8, 2013, 0.035348483847710409, 0.81753072440214614),
+ (0.01, 0.8, 2012, 0.082076334155677735, 0.84149438981678282),
+ (0.01, 0.8, 2011, 0.081444722917129037, 0.83676946601212054),
+ (0.01, 1.0, 2013, 0.02387145395098688, 0.62957619588606872),
+ (0.01, 1.0, 2012, 0.054061790174356326, 0.73592912989649606),
+ (0.01, 1.0, 2011, 0.034825001207629408, 0.71037707317514776)]
+
+@INPROCEEDINGS{Salton88term,
+    author = {Gerard Salton and Christopher Buckley},
+    title = {Term-weighting approaches in automatic text retrieval},
+    booktitle = {INFORMATION PROCESSING AND MANAGEMENT},
+    year = {1988},
+    pages = {513--523},
+    publisher = {}
+}

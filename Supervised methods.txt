@@ -1,0 +1,43 @@
+Logistic Regression
+
+Among the simpler supervised learning methods logistic regression models the probability of a random variable taking some categorical value by applying the logistic function to a  set of weighted feature inputs where the weights are learned through maximum likelihood estimation 
+
+Logistic regression does not require that the independent variables are normally distributed and works well with both ordinal and nominal variables, both of which is necessary for the verdict dataset.
+It does however assume that the independent variables are independent which it is shown in figure \ref{fig:feature_correlations} that they are not, suggesting that factor analysis such as principal or independent component analysis of the independent variables might help.
+Furthermore the output of logistic regression, $p(x)$, is linear in $x$, so the decision boundary created by logistic regression is also linear meaning that no non-linear relationships will be captured[](#cite-hastie01statisticallearning).
+
+* Preprocessing
+* Feature selection using L1
+
+
+Random Forests
+
+Decision trees are 
+* Short introduction to trees
+    * Different splitting criteria and their sensitivity to class imbalance
+    * Mention max depth, min leaf size
+    * Variation/Bias
+* Intro to bagged forests
+    * Advantage over single trees
+    * Class imbalance issues
+    * Number of estimators
+    * Number of features in model
+    * Feature selection in bagged forests
+    * CV hyper-parameter tuning
+    * Feature importance of model (bar chart as in Hasties)
+* Intro to boosted trees
+
+@book{hastie01statisticallearning,
+  added-at = {2008-05-16T16:17:42.000+0200},
+  address = {New York, NY, USA},
+  author = {Hastie, Trevor and Tibshirani, Robert and Friedman, Jerome},
+  biburl = {http://www.bibsonomy.org/bibtex/2f58afc5c9793fcc8ad8389824e57984c/sb3000},
+  interhash = {d585aea274f2b9b228fc1629bc273644},
+  intrahash = {f58afc5c9793fcc8ad8389824e57984c},
+  keywords = {ml statistics},
+  publisher = {Springer New York Inc.},
+  series = {Springer Series in Statistics},
+  timestamp = {2008-05-16T16:17:43.000+0200},
+  title = {The Elements of Statistical Learning},
+  year = 2001
+}
